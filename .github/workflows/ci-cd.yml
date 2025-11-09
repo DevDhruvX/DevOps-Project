@@ -68,7 +68,7 @@ jobs:
     - name: Run frontend tests
       run: |
         cd frontend
-        npm test -- --watchAll=false
+        npm run test
 
     - name: Build frontend for production
       run: |
