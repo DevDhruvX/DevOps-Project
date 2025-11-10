@@ -6,6 +6,12 @@
   "engines": {
     "node": "18.x"
   },
+  "overrides": {
+    "@testing-library/react": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
