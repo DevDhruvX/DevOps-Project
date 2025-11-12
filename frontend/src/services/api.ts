@@ -182,7 +182,7 @@ export const notesApi = {
   // Create new note with files
   createWithFiles: async (note: Partial<Note>, files: File[]): Promise<ApiResponse<Note>> => {
     const formData = new FormData();
-    
+
     // Add note data
     Object.entries(note).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -194,12 +194,12 @@ export const notesApi = {
         }
       }
     });
-    
+
     // Add files
     files.forEach((file) => {
       formData.append('files', file);
     });
-    
+
     const response = await api.post('/notes', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -217,7 +217,7 @@ export const notesApi = {
   // Update note with files
   updateWithFiles: async (id: string, note: Partial<Note>, files: File[]): Promise<ApiResponse<Note>> => {
     const formData = new FormData();
-    
+
     // Add note data
     Object.entries(note).forEach(([key, value]) => {
       if (value !== undefined && value !== null) {
@@ -229,12 +229,12 @@ export const notesApi = {
         }
       }
     });
-    
+
     // Add files
     files.forEach((file) => {
       formData.append('files', file);
     });
-    
+
     const response = await api.put(`/notes/${id}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -271,12 +271,12 @@ export const notesApi = {
       const response = await api.get(`/notes/files/${filename}`, {
         responseType: 'blob'
       });
-      
+
       // Create blob URL and open in new tab
       const blob = new Blob([response.data]);
       const url = window.URL.createObjectURL(blob);
       window.open(url, '_blank');
-      
+
       // Clean up the blob URL after a delay
       setTimeout(() => window.URL.revokeObjectURL(url), 1000);
     } catch (error) {
@@ -291,7 +291,7 @@ export const notesApi = {
       const response = await api.get(`/notes/files/${filename}/download`, {
         responseType: 'blob'
       });
-      
+
       // Create download link
       const blob = new Blob([response.data]);
       const url = window.URL.createObjectURL(blob);
@@ -301,7 +301,7 @@ export const notesApi = {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      
+
       // Clean up the blob URL
       window.URL.revokeObjectURL(url);
     } catch (error) {
@@ -378,16 +378,16 @@ export const authToken = {
     localStorage.setItem('studysync_token', token);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   },
-  
+
   get: () => {
     return localStorage.getItem('studysync_token');
   },
-  
+
   remove: () => {
     localStorage.removeItem('studysync_token');
     delete api.defaults.headers.common['Authorization'];
   },
-  
+
   init: () => {
     const token = authToken.get();
     if (token) {

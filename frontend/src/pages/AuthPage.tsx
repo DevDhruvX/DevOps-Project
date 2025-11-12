@@ -11,7 +11,7 @@ const AuthPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -54,17 +54,17 @@ const AuthPage = () => {
     }
 
     setErrors(newErrors);
-    
+
     // Return true if no errors
     return !Object.values(newErrors).some(error => error !== '');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setErrors({ name: '', email: '', password: '' });
-    
+
     // Validate form before submission
     if (!validateForm()) {
       return;
@@ -74,9 +74,9 @@ const AuthPage = () => {
 
     try {
       let success = false;
-      
+
       console.log('🔍 AuthPage: Attempting authentication...', { isLogin, email: formData.email });
-      
+
       if (isLogin) {
         success = await login(formData.email, formData.password);
       } else {
@@ -101,7 +101,7 @@ const AuthPage = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    
+
     setFormData({
       ...formData,
       [name]: value
@@ -146,21 +146,19 @@ const AuthPage = () => {
           <div className="flex mb-6 bg-white/5 rounded-xl p-1">
             <button
               onClick={() => setIsLogin(true)}
-              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                isLogin
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${isLogin
                   ? 'bg-white/20 text-white'
                   : 'text-white/60 hover:text-white/80'
-              }`}
+                }`}
             >
               Login
             </button>
             <button
               onClick={() => setIsLogin(false)}
-              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
-                !isLogin
+              className={`flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${!isLogin
                   ? 'bg-white/20 text-white'
                   : 'text-white/60 hover:text-white/80'
-              }`}
+                }`}
             >
               Sign Up
             </button>
@@ -184,9 +182,8 @@ const AuthPage = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
-                    className={`pl-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${
-                      errors.name ? 'border-red-500 focus:border-red-500' : ''
-                    }`}
+                    className={`pl-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${errors.name ? 'border-red-500 focus:border-red-500' : ''
+                      }`}
                     required={!isLogin}
                   />
                 </div>
@@ -208,9 +205,8 @@ const AuthPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="Enter your email"
-                  className={`pl-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${
-                    errors.email ? 'border-red-500 focus:border-red-500' : ''
-                  }`}
+                  className={`pl-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${errors.email ? 'border-red-500 focus:border-red-500' : ''
+                    }`}
                   required
                 />
               </div>
@@ -231,9 +227,8 @@ const AuthPage = () => {
                   value={formData.password}
                   onChange={handleInputChange}
                   placeholder="Enter your password"
-                  className={`pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${
-                    errors.password ? 'border-red-500 focus:border-red-500' : ''
-                  }`}
+                  className={`pl-10 pr-10 bg-white/10 border-white/20 text-white placeholder-white/50 focus:border-purple-500 ${errors.password ? 'border-red-500 focus:border-red-500' : ''
+                    }`}
                   required
                 />
                 <button

@@ -93,7 +93,7 @@ app.use((req, res, next) => {
   if (req.path.startsWith('/api')) {
     return next();
   }
-  
+
   // For all non-API routes, serve the React app
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
